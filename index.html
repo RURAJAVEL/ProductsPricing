@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolas Wholesale Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .poster {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .brand-name {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .offer-banner {
+            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            color: #333;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.4em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offer-banner::before {
+            content: '🌟';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            animation: pulse 2s infinite;
+        }
+        
+        .offer-banner::after {
+            content: '🌟';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            animation: pulse 2s infinite 1s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+        
+        .products-section {
+            padding: 30px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+            border-radius: 2px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .product-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-name {
+            flex: 1;
+            font-size: 0.9em;
+            color: #495057;
+            line-height: 1.3;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1.1em;
+            background: #d4edda;
+            padding: 4px 8px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .contact-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .whatsapp-contact {
+            background: #25d366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .exclusive-text {
+            font-size: 1.3em;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <div class="brand-name">BOLAS</div>
+            <div class="subtitle">Premium Nuts, Seeds & Dry Fruits</div>
+        </div>
+        
+        <div class="offer-banner">
+            Currently Available at B2B Wholesale Prices!
+        </div>
+        
+        <div style="background: linear-gradient(90deg, #28a745, #20c997); color: white; padding: 20px; text-align: center; position: relative; overflow: hidden;">
+            <div style="position: relative; z-index: 2;">
+                <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">🎁 SPECIAL OFFERS 🎁</div>
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                    <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; backdrop-filter: blur(10px);">
+                        <div style="font-size: 1.1em; font-weight: bold;">Minimum Order</div>
+                        <div style="font-size: 1.4em; color: #ffd700;">₹200</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; backdrop-filter: blur(10px);">
+                        <div style="font-size: 1.1em; font-weight: bold;">Orders ₹500+</div>
+                        <div style="font-size: 1.2em; color: #ffd700;">FREE ₹40 Snack Pack!</div>
+                    </div>
+                </div>
+            </div>
+            <div style="position: absolute; top: 10px; right: 20px; font-size: 2em; opacity: 0.3; animation: bounce 2s infinite;">🎉</div>
+            <div style="position: absolute; bottom: 10px; left: 20px; font-size: 2em; opacity: 0.3; animation: bounce 2s infinite 0.5s;">🎁</div>
+        </div>
+        
+        <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        </style>
+        
+        <div class="products-section">
+            <h2 class="section-title">Product Catalog</h2>
+            
+            <div class="products-grid">
+                <div class="product-category">
+                    <div class="category-title">🥜 Small Packs (16g-30g)</div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Salted Cashews 25g</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Pepper Cashews 25g</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Salted Almonds 25g</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Salted Pistachios 25g</span>
+                        <span class="product-price">₹48</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Pumpkin Seeds Salted 25g</span>
+                        <span class="product-price">₹30</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Sunflower Seeds Peri Peri 25g</span>
+                        <span class="product-price">₹20</span>
+                    </div>
+                </div>
+                
+                <div class="product-category">
+                    <div class="category-title">🌰 Trail Mix & Seeds (30g)</div>
+                    <div class="product-item">
+                        <span class="product-name">Trail Mix 30g</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Peri Peri Trail Mix 30g</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Roasted Seed Mix 30g</span>
+                        <span class="product-price">₹30</span>
+                    </div>
+                </div>
+                
+                <div class="product-category">
+                    <div class="category-title">🍿 Makhana Varieties (16g)</div>
+                    <div class="product-item">
+                        <span class="product-name">Korean Kimchi Makhana</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Peri Peri Makhana</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Roasted & Salted Makhana</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Salt & Pepper Makhana</span>
+                        <span class="product-price">₹40</span>
+                    </div>
+                </div>
+                
+                <div class="product-category">
+                    <div class="category-title">🥜 Large Packs (200g)</div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Salted Cashews</span>
+                        <span class="product-price">₹280</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Pepper Cashews</span>
+                        <span class="product-price">₹280</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Dry Roasted Chilly Cashews</span>
+                        <span class="product-price">₹280</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Honey Roasted Cashews</span>
+                        <span class="product-price">₹250</span>
+                    </div>
+                </div>
+                
+                <div class="product-category">
+                    <div class="category-title">🌴 Dates & Dry Fruits</div>
+                    <div class="product-item">
+                        <span class="product-name">Black Dates 400g</span>
+                        <span class="product-price">₹170</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Seedless Tunisian Dates 400g</span>
+                        <span class="product-price">₹240</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Arabian Black Dates 500g</span>
+                        <span class="product-price">₹160</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Dried Strawberries 200g</span>
+                        <span class="product-price">₹220</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-name">Pitted Prunes 200g</span>
+                        <span class="product-price">₹200</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <div class="contact-title">📱 Order Now!</div>
+            <a href="https://chat.whatsapp.com/L7ahfsEjp5T2KdLpxXbqtv?mode=ac_t" class="whatsapp-contact">
+                <span class="emoji">👥</span> Join WhatsApp Group
+            </a>
+            <div style="font-size: 1.2em; margin: 15px 0;">
+                <strong>Join Our WhatsApp Group to Place Orders</strong>
+            </div>
+            <div class="exclusive-text">
+                <span class="emoji">🏢</span> <strong>Exclusive for Mantri Synergy Residents</strong><br>
+                Premium quality products at wholesale prices!
+            </div>
+        </div>
+    </div>
+</body>
+</html>
